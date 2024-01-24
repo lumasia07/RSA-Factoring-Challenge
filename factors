@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+"""Module that factorizes as many numbers possible to a product of
+two smaller numbers(factors)"""
+from sys import argv
+
+
+def factor_me(val):
+    """Decompose to a simple integer greater than 1"""
+    x = 2
+
+    if val < 2:
+        return
+
+    while val % x:
+        x += 1
+    print("{:.0f}={:.0f}*{:.0f}\n".format(val, val / x, x))
+
+if len(argv) != 2:
+    print("Usage: {} <file>".format(argv[0]))
+    exit(1)
+
+try:
+    with open(argv[1]) as file:
+        for buf in file:
+            val = int(buf.strip())
+            factor_me(val)
+except:
+    pass
