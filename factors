@@ -13,7 +13,7 @@ def factor_me(val):
 
     while val % x:
         x += 1
-    print("{:.0f}={:.0f}*{:.0f}\n".format(val, val / x, x))
+    print("{:.0f}={:.0f}*{:.0f}\n".format(val, val // x, x))
 
 if len(argv) != 2:
     print("Usage: {} <file>".format(argv[0]))
