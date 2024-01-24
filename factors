@@ -16,8 +16,10 @@ def factor_me(val):
         x += 1
     print("{:.0f}={:.0f}*{:.0f}".format(val, val // x, x))
 
+
 def time_handler(signum, frame):
     exit(1)
+
 
 if len(argv) != 2:
     print("Usage: {} <file>".format(argv[0]))
@@ -31,7 +33,9 @@ try:
         for buf in file:
             val = int(buf.strip())
             factor_me(val)
-except:
-    pass
+except FileNotFoundError:
+    print("Error: File not found")
+except Exception as e:
+    print("An expected error occured:", e)
 finally:
     signal.alarm(0)
