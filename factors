@@ -38,9 +38,17 @@ def factors(filename, timer=5):
                 elapsed = time.time() - start_time
                 if elapsed > timer:
                     return
-    except:
-        pass
+    except FileNotFoundError:
+        print("File Not Found")
+    except ValueError:
+        print("Non-Integer")
+    except Exception as e:
+        print("Error", e)
 
 
 if __name__ == "__main__":
+    if len(argv) != 2:
+        print("Usage: {} <filename>".format(argv[0]))
+        exit(1)
+
     factors(argv[1])
