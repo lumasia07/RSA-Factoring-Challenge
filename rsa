@@ -1,51 +1,25 @@
 #!/usr/bin/python3
-import math
-import time
 from sys import argv
+import math
+"""Module to factorize prime numbers"""
 
 
-def factor_me(val):
-    """Decompose to prime factors"""
-    prime = []
+with open(argv[1]) as p:
+    """Finds two primt factors"""
+    for line in p:
+        prime = int(line)
+        print("{:d}=".format(prime), end='')
 
-    for x in range(2, int(math.sqrt(val)) + 1):
-        while val % x == 0:
-            prime.append(x)
-            val //= x
+        if prime % 2 == 0:
+            print("{}*2".format(prime//2))
+            continue
 
-        if val > 1:
-            prime.append(val)
-        return prime
+        for x in range(3, prime, 2):
+            if prime % x == 0:
+                factor = prime//x
 
-
-def factors(filename, timer=5):
-    """Read and print prime factors"""
-    start_time = time.time()
-    try:
-        with open(filename, encoding="utf-8") as file_me:
-            factored = []
-            for x in file_me.readlines():
-                num = int(x)
-                factored_list = factor_me(num)
-                factored.append((num, factored_list))
-
-                elapsed = time.time() - start_time
-                if elapsed > timer:
+                for y in range(3, int(math.sqrt(factor)) + 1, 2):
+                    if factor % y == 0 or y == 1:
+                        break
+                    print("{}*{}".format(factor, x))
                     break
-            for num, factored_list in factored:
-                print("{}={}".format(num, "*".join(map(str, factored_list))))
-
-    except FileNotFoundError:
-        print("File not found")
-    except ValueError:
-        print("Non-Integer")
-    except Exception as e:
-        print("Error", e)
-
-
-if __name__ == "__main__":
-    if len(argv) != 2:
-        print("Usage: {} <filename>".format(argv[0]))
-        exit(1)
-
-    factors(argv[1])
