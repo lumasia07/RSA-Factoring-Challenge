@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 from sys import argv
-import math
 """Module to factorize prime numbers"""
 
 
@@ -18,7 +17,7 @@ with open(argv[1]) as p:
             if prime % x == 0:
                 factor = prime//x
 
-                for y in range(3, int(math.sqrt(factor)) + 1, 2):
+                for y in range(3, factor, 2):
                     if factor % y == 0 or y == 0:
                         break
                     print("{}*{}".format(factor, x))
