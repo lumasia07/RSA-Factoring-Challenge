@@ -19,7 +19,7 @@ with open(argv[1]) as p:
                 factor = prime//x
 
                 for y in range(3, int(math.sqrt(factor)) + 1, 2):
-                    if factor % y == 0 or y == 1:
+                    if factor % y == 0 or y == 0:
                         break
                     print("{}*{}".format(factor, x))
                     break
